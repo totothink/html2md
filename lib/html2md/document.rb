@@ -323,7 +323,7 @@ class Html2Md
     end
 
     def end_img(attributes)
-      @markdown << "</img>"
+      
     end    
 
     def characters c
