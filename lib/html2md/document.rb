@@ -308,6 +308,24 @@ class Html2Md
       new_line if @markdown[-1] != "\n" and @markdown[-1] != 10
     end
 
+    def start_img(attributes)
+      alt  = src = ''
+      attributes.each do |attrib|
+        case attrib[0].downcase
+        when 'alt'
+          alt = "alt #{attrib[1]}"
+        when 'src'
+          src = attrib[1]
+        end
+      end
+      alt = alt.eql?('') ? 'alt ' : alt
+      @markdown << "![#{alt}](#{src})"
+    end
+
+    def end_img(attributes)
+      @markdown << "</img>"
+    end    
+
     def characters c
       #Escape character data with _
       c.gsub!('_','\_') unless @pre_block
